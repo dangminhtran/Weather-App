@@ -21,6 +21,11 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
     private Context context;
     private ArrayList<WeatherRVModal> weatherRVModalArrayList;
 
+    public WeatherRVAdapter(Context context, ArrayList<WeatherRVModal> weatherRVModalArrayList) {
+        this.context = context;
+        this.weatherRVModalArrayList = weatherRVModalArrayList;
+    }
+
     @NonNull
     @Override
     public WeatherRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

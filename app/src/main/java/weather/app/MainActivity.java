@@ -3,7 +3,10 @@ package weather.app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -23,10 +26,15 @@ public class MainActivity extends AppCompatActivity {
     private ImageView backIV, iconIV, searchIV;
     private ArrayList<WeatherRVModal> weatherRVModalArrayList;
     private WeatherRVAdapter weatherRVAdapter;
+    private LocationManager locationManager;
+    private int PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         setContentView(R.layout.activity_main);
         homeRL = findViewById(R.id.idRLHome);
         loadingPB = findViewById(R.id.idPBLoading);
@@ -40,7 +48,14 @@ public class MainActivity extends AppCompatActivity {
         searchIV = findViewById(R.id.idIVSearch);
         weatherRVModalArrayList = new ArrayList<>();
         weatherRVAdapter = new WeatherRVAdapter(this, weatherRVModalArrayList);
+        weatherRV.setAdapter(weatherRVAdapter);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+    }
+
+    private void getWeatherInfo(String cityName) {
+        String url = "http://api.weatherapi.com/v1/forecast.json?key=32bd5d2f4300464db7525107231701&q=" + cityName + "&days=1&aqi=yes&alerts=yes";
 
     }
 }
